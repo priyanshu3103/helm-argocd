@@ -1,0 +1,13 @@
+applications:
+  - name: root-argocd
+    namespace: helm-argocd
+    project: default
+    repoURL: https://github.com/priyanshu3103/helm-charts.git   # your helm-charts repo
+    targetRevision: HEAD
+    path: helm-argocd                                            # folder name inside helm-charts repo
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
