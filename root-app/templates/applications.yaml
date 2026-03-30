@@ -12,6 +12,9 @@ spec:
     repoURL: {{ .repoURL }}
     targetRevision: {{ .targetRevision | default "HEAD" }}
     path: {{ .path }}
+    helm:                        # ← ADD THIS
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ .namespace }}
