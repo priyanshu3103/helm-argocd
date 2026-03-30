@@ -2,9 +2,9 @@ applications:
   - name: helm-argocd
     namespace: helm-argocd
     project: default
-    repoURL: https://github.com/priyanshu3103/helm-charts.git   # your helm-charts repo
-    targetRevision: HEAD
-    path: helm-argocd                                            # folder name inside helm-charts repo
+    repoURL: https://priyanshu3103.github.io/helm-charts   # Helm repo URL
+    targetRevision: 0.1.0                                   # Chart version
+    chart: helm-argocd                                      # Chart name
     syncPolicy:
       automated:
         prune: true
