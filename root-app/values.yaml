@@ -1,5 +1,5 @@
 applications:
-  - name: root-argocd
+  - name: helm-argocd
     namespace: helm-argocd
     project: default
     repoURL: https://github.com/priyanshu3103/helm-charts.git   # your helm-charts repo
