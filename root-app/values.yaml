@@ -25,3 +25,17 @@ applications:
         selfHeal: true
       syncOptions:
         - CreateNamespace=true
+
+  - name: nginx-ingress
+    namespace: ingress-nginx
+    project: default
+    destination: https://172.21.0.2:6443
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.11.3
+    chart: ingress-nginx
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
