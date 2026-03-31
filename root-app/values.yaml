@@ -1,10 +1,40 @@
 applications:
-  - name: helm-argocd
-    namespace: helm-argocd
+  - name: nginx-ingress
+    namespace: ingress-nginx
     project: default
-    repoURL: https://priyanshu3103.github.io/helm-charts   # Helm repo URL
-    targetRevision: 0.1.0                                   # Chart version
-    chart: helm-argocd                                      # Chart name
+    destination: https://kubernetes.default.svc
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.11.3
+    chart: ingress-nginx
+    helmValues: |
+      controller:
+        service:
+          type: LoadBalancer
+        hostPort:
+          enabled: false
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
+
+  - name: argocd
+    namespace: argocd
+    project: default
+    destination: https://kubernetes.default.svc
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: 7.8.23
+    chart: argo-cd
+    helmValues: |
+      server:
+        insecure: true
+        ingress:
+          enabled: true
+          annotations:
+            kubernetes.io/ingress.class: "nginx"
+          hosts:
+            - argocd.local
     syncPolicy:
       automated:
         prune: true
@@ -15,33 +45,24 @@ applications:
   - name: helm-argocd-dev
     namespace: helm-argocd-dev
     project: default
-    destination: https://172.21.0.2:6443    # k3d dev-cluster
+    destination: https://kubernetes.default.svc
     repoURL: https://priyanshu3103.github.io/helm-charts
     targetRevision: 0.2.4
     chart: helm-argocd
+    helmValues: |
+      ingress:
+        enabled: true
+        className: "nginx"
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+        hosts:
+          - host: helm-argocd.local
+            paths:
+              - path: /
+                pathType: Prefix
     syncPolicy:
       automated:
         prune: true
         selfHeal: true
       syncOptions:
         - CreateNamespace=true
-
-  # - name: nginx-ingress
-  #   namespace: ingress-nginx
-  #   project: default
-  #   destination: https://172.21.0.2:6443
-  #   repoURL: https://kubernetes.github.io/ingress-nginx
-  #   targetRevision: 4.11.3
-  #   chart: ingress-nginx
-  #   helmValues: |
-  #     controller:
-  #       service:
-  #         type: NodePort
-  #       hostPort:
-  #         enabled: false
-  #   syncPolicy:
-  #     automated:
-  #       prune: true
-  #       selfHeal: true
-  #     syncOptions:
-  #       - CreateNamespace=true
