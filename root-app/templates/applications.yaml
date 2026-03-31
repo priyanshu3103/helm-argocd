@@ -13,7 +13,7 @@ spec:
     targetRevision: {{ .targetRevision | default "HEAD" }}
     chart: {{ .chart }}
   destination:
-    server: https://kubernetes.default.svc
+    server: {{ .destination | default "https://kubernetes.default.svc" }}
     namespace: {{ .namespace }}
   syncPolicy:
     {{- if .syncPolicy.automated }}
