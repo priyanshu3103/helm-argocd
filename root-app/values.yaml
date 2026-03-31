@@ -33,6 +33,12 @@ applications:
     repoURL: https://kubernetes.github.io/ingress-nginx
     targetRevision: 4.11.3
     chart: ingress-nginx
+    helmValues: |
+      controller:
+        service:
+          type: NodePort
+        hostPort:
+          enabled: true
     syncPolicy:
       automated:
         prune: true

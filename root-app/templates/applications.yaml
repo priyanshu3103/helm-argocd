@@ -12,6 +12,11 @@ spec:
     repoURL: {{ .repoURL }}
     targetRevision: {{ .targetRevision | default "HEAD" }}
     chart: {{ .chart }}
+    {{- if .helmValues }}
+    helm:
+      values: |
+        {{ .helmValues | nindent 8 }}
+    {{- end }}
   destination:
     server: {{ .destination | default "https://kubernetes.default.svc" }}
     namespace: {{ .namespace }}
