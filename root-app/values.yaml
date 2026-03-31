@@ -11,3 +11,17 @@ applications:
         selfHeal: true
       syncOptions:
         - CreateNamespace=true
+
+  - name: helm-argocd-dev
+    namespace: helm-argocd-dev
+    project: default
+    destination: https://172.21.0.2:6443    # k3d dev-cluster
+    repoURL: https://priyanshu3103.github.io/helm-charts
+    targetRevision: 0.1.0
+    chart: helm-argocd
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
