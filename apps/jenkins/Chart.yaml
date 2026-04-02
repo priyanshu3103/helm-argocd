@@ -6,4 +6,4 @@ version: 0.1.0
 dependencies:
   - name: jenkins
     version: 0.2.4
-    repository: https://priyanshu3103.github.io/helm-charts
+    repository: https://github.com/priyanshu3103/helm-charts
