@@ -1,0 +1,11 @@
+jenkins:
+  ingress:
+    enabled: true
+    className: ""
+    annotations:
+      traefik.ingress.kubernetes.io/router.tls: "false"
+    hosts:
+      - host: jenkins.localhost
+        paths:
+          - path: /
+            pathType: Prefix
