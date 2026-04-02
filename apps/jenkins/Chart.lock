@@ -1,6 +1,6 @@
 dependencies:
 - name: jenkins
   repository: https://priyanshu3103.github.io/helm-charts
-  version: 0.2.5
-digest: sha256:ace9ea9b787d10a8b943a7c4c86dd8559de425410734ad6efca765ba5225da30
-generated: "2026-04-02T22:03:21.219131+05:30"
+  version: 0.2.6
+digest: sha256:7eade17b093af35dba49c1b21b2b81ed0c8bc9bf3800232fb1b4aa82d8376dba
+generated: "2026-04-02T22:09:30.257555+05:30"

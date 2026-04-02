@@ -5,5 +5,5 @@ type: application
 version: 0.1.0
 dependencies:
   - name: jenkins
-    version: 0.2.5
+    version: 0.2.6
     repository: https://priyanshu3103.github.io/helm-charts
