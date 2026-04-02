@@ -1,28 +1,42 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: apps
+  name: devops-tools
   namespace: argocd
+
 spec:
   generators:
-    - git:
-        repoURL: https://github.com/priyanshu3103/helm-argocd.git
-        revision: HEAD
-        directories:
-          - path: apps/*
+    - list:
+        elements:
+          {{- range .Values.applications }}
+          - name: {{ .name }}
+            chart: {{ .chart }}
+            version: {{ .targetRevision }}
+            values: |
+{{ .values | indent 14 }}
+          {{- end }}
+
   template:
     metadata:
-      name: '{{`{{path.basename}}`}}'
+      name: '{{name}}'
       namespace: argocd
+
     spec:
       project: default
+
       source:
-        repoURL: https://github.com/priyanshu3103/helm-argocd.git
-        targetRevision: HEAD
-        path: '{{`{{path}}`}}'
+        repoURL: https://priyanshu3103.github.io/helm-charts
+        chart: '{{chart}}'
+        targetRevision: '{{version}}'
+
+        helm:
+          values: |
+{{ values | indent 12 }}
+
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{`{{path.basename}}`}}'
+        namespace: '{{name}}'
+
       syncPolicy:
         automated:
           prune: true
