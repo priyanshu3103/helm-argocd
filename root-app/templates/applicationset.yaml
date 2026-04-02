@@ -18,7 +18,7 @@ spec:
 
   template:
     metadata:
-      name: '{{name}}'
+      name: '{{`{{name}}`}}'
       namespace: argocd
 
     spec:
@@ -26,16 +26,16 @@ spec:
 
       source:
         repoURL: https://priyanshu3103.github.io/helm-charts
-        chart: '{{chart}}'
-        targetRevision: '{{version}}'
+        chart: '{{`{{chart}}`}}'
+        targetRevision: '{{`{{version}}`}}'
 
         helm:
           values: |
-{{ values | indent 12 }}
+{{`{{values}}` | indent 12 }}
 
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{name}}'
+        namespace: '{{`{{name}}`}}'
 
       syncPolicy:
         automated:
