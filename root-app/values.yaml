@@ -6,6 +6,6 @@ applicationSet:
 
   apps:
     - name: jenkins
-      namespace: jenkins
+      namespace: devops-tools
       chart: jenkins
       version: 0.2.9
