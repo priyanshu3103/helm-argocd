@@ -1,14 +1,11 @@
-applications:
-  - name: jenkins
-    namespace: jenkins
-    project: default
-    destination: https://kubernetes.default.svc
-    repoURL: https://priyanshu3103.github.io/helm-charts
-    targetRevision: 0.2.4
-    chart: jenkins
-    syncPolicy:
-      automated:
-        prune: true
-        selfHeal: true
-      syncOptions:
-        - CreateNamespace=true
+applicationSet:
+  name: apps
+  repo: https://github.com/priyanshu3103/helm-argocd.git
+  revision: HEAD
+  chartsRepo: https://priyanshu3103.github.io/helm-charts
+
+  apps:
+    - name: jenkins
+      namespace: jenkins
+      chart: jenkins
+      version: 0.2.7

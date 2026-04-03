@@ -1,42 +1,40 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: devops-tools
+  name: {{ .Values.applicationSet.name }}
   namespace: argocd
-
 spec:
   generators:
     - list:
         elements:
-          {{- range .Values.applications }}
+          {{- range .Values.applicationSet.apps }}
           - name: {{ .name }}
+            namespace: {{ .namespace }}
             chart: {{ .chart }}
-            version: {{ .targetRevision }}
-            values: |
-{{ toYaml .values | indent 14 }}
+            version: {{ .version | quote }}
           {{- end }}
-
   template:
     metadata:
-      name: '{{`{{name}}`}}'
-      namespace: argocd
-
+      name: "{{`{{name}}`}}"
     spec:
       project: default
-
       source:
-        repoURL: https://priyanshu3103.github.io/helm-charts
-        chart: '{{`{{chart}}`}}'
-        targetRevision: '{{`{{version}}`}}'
-
+        repoURL: {{ .Values.applicationSet.chartsRepo }}
+        chart: "{{`{{chart}}`}}"
+        targetRevision: "{{`{{version}}`}}"
         helm:
-          values: |
-{{`{{values}}` | indent 12 }}
-
+          valueFiles:
+            - $values/apps/{{`{{name}}`}}/values.yaml
+      sources:
+        - repoURL: {{ .Values.applicationSet.chartsRepo }}
+          chart: "{{`{{chart}}`}}"
+          targetRevision: "{{`{{version}}`}}"
+        - repoURL: {{ .Values.applicationSet.repo }}
+          targetRevision: {{ .Values.applicationSet.revision }}
+          ref: values
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{`{{name}}`}}'
-
+        namespace: "{{`{{namespace}}`}}"
       syncPolicy:
         automated:
           prune: true

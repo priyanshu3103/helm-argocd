@@ -1,23 +1,10 @@
-applications:
-  - name: jenkins
-    chart: jenkins
-    targetRevision: 0.2.4
-    values: |
-      jenkins:
-        ingress:
-          enabled: true
-          className: ""
-          annotations:
-            traefik.ingress.kubernetes.io/router.tls: "false"
-          hosts:
-            - host: jenkins.localhost
-              paths:
-                - path: /
-                  pathType: Prefix
-
-  - name: nginx
-    chart: ingress-nginx
-    targetRevision: 4.10.0
-    values: |
-      controller:
-        replicaCount: 1
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "false"
+  hosts:
+    - host: jenkins.localhost
+      paths:
+        - path: /
+          pathType: Prefix
