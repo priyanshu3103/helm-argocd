@@ -8,7 +8,7 @@ spec:
 
   source:
     repoURL: https://github.com/priyanshu3103/helm-argocd.git
-    targetRevision: HEAD
+    targetRevision: master
     path: apps   # folder where child apps are stored
 
   destination:
