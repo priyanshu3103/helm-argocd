@@ -5,16 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-
   source:
     repoURL: https://github.com/priyanshu3103/helm-argocd.git
-    targetRevision: master
-    path: apps   # folder where child apps are stored
-
+    targetRevision: HEAD
+    path: root-app
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
-
   syncPolicy:
     automated:
       prune: true
