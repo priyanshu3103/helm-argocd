@@ -1,5 +1,5 @@
 applicationSet:
-  name: apps
+  name: devops-tools
   repo: https://github.com/priyanshu3103/helm-argocd.git
   revision: HEAD
   chartsRepo: https://priyanshu3103.github.io/helm-charts
