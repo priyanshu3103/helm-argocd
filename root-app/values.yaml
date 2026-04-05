@@ -9,3 +9,6 @@ applicationSet:
       namespace: devops-tools
       chart: jenkins
       version: 0.2.34
+      syncOptions:
+        - CreateNamespace=true
+        - RespectIgnoreDifferences=true
