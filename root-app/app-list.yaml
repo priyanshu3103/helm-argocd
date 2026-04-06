@@ -1,0 +1,8 @@
+apps:
+    - name: jenkins
+      namespace: devops-tools
+      chart: jenkins
+      version: 0.2.46
+      syncOptions:
+        - CreateNamespace=true
+        - RespectIgnoreDifferences=true
