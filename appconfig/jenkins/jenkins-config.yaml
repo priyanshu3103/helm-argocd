@@ -6,3 +6,12 @@ metadata:
 data:
   SOME_KEY: some-value
   ANOTHER_KEY: another-value
+  DISABLE_AUTO_SYNC: "true"
+  JENKINS_URL: "http://jenkins.devops-tools.svc.cluster.local:8080"
+  JENKINS_ADMIN_USER: "admin"
+  JENKINS_ADMIN_PASSWORD: "admin-password"
+  # Add more configuration key-value pairs as needed
+  JENKINS_HOME: "/var/jenkins_home"
+  JENKINS_EXECUTORS: "2"
+  JENKINS_LOG_LEVEL: "INFO"
+  JENKINS_SYSTEM_MESSAGE: "Welcome to Jenkins!"
