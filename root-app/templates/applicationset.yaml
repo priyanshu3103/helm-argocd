@@ -40,10 +40,11 @@ spec:
         server: https://kubernetes.default.svc
         namespace: "{{`{{namespace}}`}}"
       syncPolicy:
+        {{- if not .disableAutoSync }}
         automated:
-          prune: true
           selfHeal: true
+          prune: true
+        {{- end }}
         syncOptions:
-          {{- if .syncOptions }}
-          {{- toYaml .syncOptions | nindent 4 }}
-          {{- end }}
+          - CreateNamespace=true
+          - ServerSideApply=true
