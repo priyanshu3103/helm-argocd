@@ -1,9 +1,0 @@
-apiVersion: v2
-name: jenkins
-description: Jenkins deployment
-type: application
-version: 0.1.0
-dependencies:
-  - name: jenkins
-    version: 0.2.7
-    repository: https://priyanshu3103.github.io/helm-charts
