@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins-custom-config
+  namespace: devops-tools
+data:
+  SOME_KEY: some-value
+  ANOTHER_KEY: another-value
