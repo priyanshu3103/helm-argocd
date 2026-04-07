@@ -34,7 +34,7 @@ spec:
           ref: values
         - repoURL: {{ .Values.applicationSet.repo }}
           targetRevision: {{ .Values.applicationSet.revision }}
-          path: appconfig/{{`{{name}}`}}-config.yaml
+          path: appconfig/{{`{{name}}`}}
           ref: appconfig
       destination:
         server: https://kubernetes.default.svc
