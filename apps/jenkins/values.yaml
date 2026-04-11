@@ -42,7 +42,39 @@ controller:
     periodSeconds: 10
 
 # Configure Jenkins agent templates for Kubernetes cloud
+# apps/jenkins/values.yaml
+# Try this structure first
+
+# Option A: Direct casc override
 casc:
+  jenkins.yaml: |
+    jenkins:
+      clouds:
+        - kubernetes:
+            templates:
+              - name: "jenkins-agent"
+                containers:
+                  - name: "jnlp"
+                    resourceRequestCpu: "200m"
+                    resourceRequestMemory: "512Mi"
+                    resourceLimitCpu: "1000m"
+                    resourceLimitMemory: "1Gi"
+
+# Option B: If chart uses 'jenkins' as root
+jenkins:
+  clouds:
+    - kubernetes:
+        templates:
+          - name: "jenkins-agent"
+            containers:
+              - name: "jnlp"
+                resourceRequestCpu: "200m"
+                resourceRequestMemory: "512Mi"
+                resourceLimitCpu: "1000m"
+                resourceLimitMemory: "1Gi"
+
+# Option C: Direct ConfigMap data override
+configMapData:
   jenkins.yaml: |
     jenkins:
       clouds:
