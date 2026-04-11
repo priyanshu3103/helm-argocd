@@ -48,17 +48,27 @@ readinessProbe:
   timeoutSeconds: 5
   periodSeconds: 10
 
-# Agent resources override (this goes into casc ConfigMap)
-configMapData:
-  jenkins.yaml: |
-    jenkins:
-      clouds:
-        - kubernetes:
-            templates:
-              - name: "jenkins-agent"
-                containers:
-                  - name: "jnlp"
-                    resourceRequestCpu: "200m"
-                    resourceRequestMemory: "512Mi"
-                    resourceLimitCpu: "1000m"
-                    resourceLimitMemory: "1Gi"
+
+# Cloud configuration overrides
+cloud:
+  serverUrl: "https://kubernetes.default.svc"
+  skipTlsVerify: false  # Change to false if needed
+  connectTimeout: 10     # Increase timeout
+  readTimeout: 30        # Increase timeout
+  containerCapStr: "20"  # Increase container capacity
+  podRetention: "always" # Change pod retention policy
+
+# Agent configuration overrides
+agent:
+  label: "custom-jenkins-agent"
+  idleMinutes: 10
+  image: "priyanshu30/jenkins-mysql:custom-tag"
+  workingDir: "/opt/jenkins/agent"
+  ttyEnabled: false
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "512Mi"
+    limits:
+      cpu: "1000m"
+      memory: "1Gi"
