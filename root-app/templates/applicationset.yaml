@@ -1,18 +1,28 @@
+{{- $autoSyncApps := list }}
+{{- $manualApps := list }}
+{{- range .Values.applicationSet.apps }}
+  {{- if .disableAutoSync }}
+    {{- $manualApps = append $manualApps . }}
+  {{- else }}
+    {{- $autoSyncApps = append $autoSyncApps . }}
+  {{- end }}
+{{- end }}
+
+{{- if $autoSyncApps }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: {{ .Values.applicationSet.name }}
+  name: {{ .Values.applicationSet.name }}-autosync
   namespace: argocd
 spec:
   generators:
     - list:
         elements:
-          {{- range .Values.applicationSet.apps }}
+          {{- range $autoSyncApps }}
           - name: {{ .name }}
             namespace: {{ .namespace }}
             chart: {{ .chart }}
             version: {{ .version | quote }}
-            disableAutoSync: {{ .disableAutoSync | default false | quote }}
           {{- end }}
   template:
     metadata:
@@ -42,11 +52,47 @@ spec:
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
-  templatePatch: |
-    {{`{{- if eq .disableAutoSync "true" }}`}}
+{{- end }}
+---
+{{- if $manualApps }}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: {{ .Values.applicationSet.name }}-manual
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          {{- range $manualApps }}
+          - name: {{ .name }}
+            namespace: {{ .namespace }}
+            chart: {{ .chart }}
+            version: {{ .version | quote }}
+          {{- end }}
+  template:
+    metadata:
+      name: "{{`{{name}}`}}"
     spec:
+      project: default
+      sources:
+        - repoURL: {{ .Values.applicationSet.chartsRepo }}
+          chart: "{{`{{chart}}`}}"
+          targetRevision: "{{`{{version}}`}}"
+          helm:
+            valueFiles:
+              - $values/apps/{{`{{name}}`}}/values.yaml
+        - repoURL: {{ .Values.applicationSet.repo }}
+          targetRevision: {{ .Values.applicationSet.revision }}
+          ref: values
+        - repoURL: {{ .Values.applicationSet.repo }}
+          targetRevision: {{ .Values.applicationSet.revision }}
+          path: appconfig/{{`{{name}}`}}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{`{{namespace}}`}}"
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
-    {{`{{- end }}`}}
+{{- end }}
