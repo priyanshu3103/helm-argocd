@@ -9,6 +9,3 @@ applicationSet:
       chart: jenkins
       version: 0.2.50
       disableAutoSync: true
-      syncOptions:
-        - CreateNamespace=true
-        - RespectIgnoreDifferences=true

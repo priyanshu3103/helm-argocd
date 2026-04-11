@@ -36,17 +36,17 @@ spec:
         server: https://kubernetes.default.svc
         namespace: "{{`{{namespace}}`}}"
       syncPolicy:
-        syncOptions:
-          - CreateNamespace=true
-          - ServerSideApply=true
-  templatePatch: |
-    {{`{{- if eq .disableAutoSync "false"}}`}}
-    spec:
-      syncPolicy:
         automated:
           selfHeal: true
           prune: true
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
-    {{`{{- end}}`}}
+  templatePatch: |
+    {{`{{- if eq .disableAutoSync "true" }}`}}
+    spec:
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
+    {{`{{- end }}`}}
