@@ -53,22 +53,22 @@ readinessProbe:
 cloud:
   serverUrl: "https://kubernetes.default.svc"
   skipTlsVerify: false  # Change to false if needed
-  connectTimeout: 10     # Increase timeout
-  readTimeout: 30        # Increase timeout
-  containerCapStr: "20"  # Increase container capacity
-  podRetention: "always" # Change pod retention policy
+  connectTimeout: 5     # Increase timeout
+  readTimeout: 15        # Increase timeout
+  containerCapStr: 10  # Increase container capacity
+  podRetention: "never" # Change pod retention policy
 
 # Agent configuration overrides
 agent:
-  label: "custom-jenkins-agent"
-  idleMinutes: 10
-  image: "priyanshu30/jenkins-mysql:custom-tag"
+  label: "jenkins-agent"
+  idleMinutes: 5
+  image: "priyanshu30/jenkins-mysql:tag-2"
   workingDir: "/opt/jenkins/agent"
   ttyEnabled: false
   resources:
     requests:
-      cpu: "200m"
-      memory: "512Mi"
+      cpu: "100m"
+      memory: "256Mi"
     limits:
-      cpu: "1000m"
-      memory: "1Gi"
+      cpu: "500m"
+      memory: "512Mi"
