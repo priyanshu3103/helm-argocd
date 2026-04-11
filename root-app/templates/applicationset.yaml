@@ -12,39 +12,41 @@ spec:
             namespace: {{ .namespace }}
             chart: {{ .chart }}
             version: {{ .version | quote }}
+            disableAutoSync: {{ .disableAutoSync | default false | quote }}
           {{- end }}
   template:
     metadata:
       name: "{{`{{name}}`}}"
     spec:
       project: default
-      source:
-        repoURL: {{ .Values.applicationSet.chartsRepo }}
-        chart: "{{`{{chart}}`}}"
-        targetRevision: "{{`{{version}}`}}"
-        helm:
-          valueFiles:
-            - $values/apps/{{`{{name}}`}}/values.yaml
       sources:
         - repoURL: {{ .Values.applicationSet.chartsRepo }}
           chart: "{{`{{chart}}`}}"
           targetRevision: "{{`{{version}}`}}"
+          helm:
+            valueFiles:
+              - $values/apps/{{`{{name}}`}}/values.yaml
         - repoURL: {{ .Values.applicationSet.repo }}
           targetRevision: {{ .Values.applicationSet.revision }}
           ref: values
         - repoURL: {{ .Values.applicationSet.repo }}
           targetRevision: {{ .Values.applicationSet.revision }}
           path: appconfig/{{`{{name}}`}}
-          ref: appconfig
       destination:
         server: https://kubernetes.default.svc
         namespace: "{{`{{namespace}}`}}"
       syncPolicy:
-        {{- if not .disableAutoSync }}
-        automated:
-          selfHeal: true
-          prune: true
-        {{- end }}
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
+  templatePatch: |
+    {{`{{- if eq .disableAutoSync "false"}}`}}
+    spec:
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
+    {{`{{- end}}`}}

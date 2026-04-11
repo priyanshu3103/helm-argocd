@@ -6,6 +6,9 @@ applicationSet:
   apps:
     - name: jenkins
       namespace: devops-tools
-      disableAutoSync: true
       chart: jenkins
       version: 0.2.50
+      disableAutoSync: true
+      syncOptions:
+        - CreateNamespace=true
+        - RespectIgnoreDifferences=true
