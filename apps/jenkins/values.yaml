@@ -1,3 +1,6 @@
+# apps/jenkins/values.yaml
+# For YOUR custom chart - NO controller section
+
 ingress:
   enabled: true
   className: ""
@@ -9,8 +12,11 @@ ingress:
         - path: /
           pathType: Prefix
 
-controller:
-  replicaCount: 1
+# Your chart uses these directly
+replicaCount: 1
+
+# Resource overrides for Jenkins controller pod
+resources:
   requests:
     cpu: 200m
     memory: 256Mi
@@ -18,38 +24,41 @@ controller:
     cpu: 1000m
     memory: 1Gi
 
-  startupProbe:
-    httpGet:
-      path: /login
-      port: 8080
-    failureThreshold: 30
-    periodSeconds: 10
+# Probe overrides
+startupProbe:
+  httpGet:
+    path: /login
+    port: 8080
+  failureThreshold: 30
+  periodSeconds: 10
 
-  livenessProbe:
-    httpGet:
-      path: /login
-      port: 8080
-    initialDelaySeconds: 120
-    timeoutSeconds: 10
-    periodSeconds: 30
+livenessProbe:
+  httpGet:
+    path: /login
+    port: 8080
+  initialDelaySeconds: 120
+  timeoutSeconds: 10
+  periodSeconds: 30
 
-  readinessProbe:
-    httpGet:
-      path: /login
-      port: 8080
-    initialDelaySeconds: 60
-    timeoutSeconds: 5
-    periodSeconds: 10
+readinessProbe:
+  httpGet:
+    path: /login
+    port: 8080
+  initialDelaySeconds: 60
+  timeoutSeconds: 5
+  periodSeconds: 10
 
-# Configure Jenkins agent templates for Kubernetes cloud
-jenkins:
-  clouds:
-    - kubernetes:
-        templates:
-          - name: "jenkins-agent"
-            containers:
-              - name: "jnlp"
-                resourceRequestCpu: "200m"
-                resourceRequestMemory: "512Mi"
-                resourceLimitCpu: "1000m"
-                resourceLimitMemory: "1Gi"
+# Agent resources override (this goes into casc ConfigMap)
+casc:
+  jenkins.yaml: |
+    jenkins:
+      clouds:
+        - kubernetes:
+            templates:
+              - name: "jenkins-agent"
+                containers:
+                  - name: "jnlp"
+                    resourceRequestCpu: "200m"
+                    resourceRequestMemory: "512Mi"
+                    resourceLimitCpu: "1000m"
+                    resourceLimitMemory: "1Gi"
