@@ -12,6 +12,5 @@ data:
   JENKINS_ADMIN_PASSWORD: "admin-password"
   # Add more configuration key-value pairs as needed
   JENKINS_HOME: "/var/jenkins_home"
-  JENKINS_EXECUTORS: "2"
-  JENKINS_LOG_LEVEL: "INFO"
   JENKINS_SYSTEM_MESSAGE: "Welcome to Jenkins!"
+  JENKINS_DISABLE_SETUP_WIZARD: "true"
