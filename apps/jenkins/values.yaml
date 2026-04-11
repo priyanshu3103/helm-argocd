@@ -18,8 +18,8 @@ replicaCount: 1
 # Resource overrides for Jenkins controller pod
 resources:
   requests:
-    cpu: 200m
-    memory: 256Mi
+    cpu: 500m
+    memory: 512Mi
   limits:
     cpu: 1000m
     memory: 1Gi
