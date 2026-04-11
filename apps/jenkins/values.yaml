@@ -1,19 +1,5 @@
 replicaCount: 1
 
-image:
-  repository: jenkins/jenkins
-  tag: "2.541.3-lts-jdk21"
-  pullPolicy: IfNotPresent
-
-serviceAccount:
-  create: true
-  name: jenkins
-
-service:
-  type: ClusterIP
-  port: 8080
-  agentPort: 50000
-
 ingress:
   enabled: true
   className: ""
@@ -24,11 +10,6 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
-
-persistence:
-  enabled: true
-  size: 2560Mi
-  storageClassName: local-path
 
 agent:
   enabled: true
