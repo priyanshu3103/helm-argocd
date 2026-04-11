@@ -8,6 +8,7 @@
   {{- end }}
 {{- end }}
 
+# ==================== Auto Sync ApplicationSet ====================
 {{- if $autoSyncApps }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -32,19 +33,23 @@ spec:
       sources:
         - repoURL: {{ .Values.applicationSet.chartsRepo }}
           chart: "{{`{{chart}}`}}"
-          targetRevision: "{{`{{version}}`}}"
+          targetRevision: "{{`{{version}}`}}"     # ← This controls chart version upgrade
           helm:
             valueFiles:
               - $values/apps/{{`{{name}}`}}/values.yaml
+
+        # Git repo for values + appconfig (this will react to git changes)
         - repoURL: {{ .Values.applicationSet.repo }}
           targetRevision: {{ .Values.applicationSet.revision }}
           ref: values
         - repoURL: {{ .Values.applicationSet.repo }}
           targetRevision: {{ .Values.applicationSet.revision }}
           path: appconfig/{{`{{name}}`}}
+
       destination:
         server: https://kubernetes.default.svc
         namespace: "{{`{{namespace}}`}}"
+
       syncPolicy:
         automated:
           selfHeal: true
@@ -53,7 +58,9 @@ spec:
           - CreateNamespace=true
           - ServerSideApply=true
 {{- end }}
+
 ---
+# ==================== Manual Sync ApplicationSet ====================
 {{- if $manualApps }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -82,15 +89,18 @@ spec:
           helm:
             valueFiles:
               - $values/apps/{{`{{name}}`}}/values.yaml
+
         - repoURL: {{ .Values.applicationSet.repo }}
           targetRevision: {{ .Values.applicationSet.revision }}
           ref: values
         - repoURL: {{ .Values.applicationSet.repo }}
           targetRevision: {{ .Values.applicationSet.revision }}
           path: appconfig/{{`{{name}}`}}
+
       destination:
         server: https://kubernetes.default.svc
         namespace: "{{`{{namespace}}`}}"
+
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
