@@ -11,6 +11,7 @@ ingress:
         - path: /
           pathType: Prefix
 
+controller:
   requests:
     cpu: 200m
     memory: 256Mi
@@ -18,7 +19,6 @@ ingress:
     cpu: 1000m
     memory: 1Gi
 
-controller:
   startupProbe:
     httpGet:
       path: /login
