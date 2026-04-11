@@ -1,6 +1,3 @@
-# apps/jenkins/values.yaml
-# For YOUR custom chart - NO controller section
-
 ingress:
   enabled: true
   className: ""
@@ -14,7 +11,7 @@ ingress:
 
 # Your chart uses these directly
 replicaCount: 1
-
+replicasethistorylimit: 4
 # Resource overrides for Jenkins controller pod
 resources:
   requests:
