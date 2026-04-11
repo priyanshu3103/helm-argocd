@@ -14,15 +14,20 @@ ingress:
 agent:
   enabled: true
   image:
-    repository: jenkins/inbound-agent
-    tag: "latest"
+    repository: priyanshu30/jenkins-mysql
+    tag: "tag-2"
+  workingDir: "/home/jenkins/agent"
   resources:
     requests:
       cpu: 100m
-      memory: 128Mi
+      memory: 256Mi
     limits:
       cpu: 500m
       memory: 512Mi
+  # Optional but recommended
+  args: "${computer.jnlpmac} ${computer.name}"
+  # Keep same label as your pipelines
+  podName: "jenkins-agent"
 
 resources:
   requests:
