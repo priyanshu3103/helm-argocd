@@ -9,6 +9,13 @@ ingress:
         - path: /
           pathType: Prefix
 
+# Deployment strategy overrides
+deploymentStrategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 25%
+    maxUnavailable: 25%
+
 # Your chart uses these directly
 replicaCount: 1
 revisionHistoryLimit: 4
