@@ -1,9 +1,18 @@
 replicaCount: 1
 
 image:
-repository: argoproj/argocd
-tag: v2.7.0
-pullPolicy: IfNotPresent
+  repository: jenkins/jenkins
+  tag: "2.541.3-lts-jdk21"
+  pullPolicy: IfNotPresent
+
+serviceAccount:
+  create: true
+  name: jenkins
+
+service:
+  type: ClusterIP
+  port: 8080
+  agentPort: 50000
 
 ingress:
   enabled: true
@@ -16,17 +25,28 @@ ingress:
         - path: /
           pathType: Prefix
 
-resources:
-  limits:
-    cpu: 500m
-    memory: 512Mi
-  requests:
-    cpu: 250m
-    memory: 256Mi
+persistence:
+  enabled: true
+  size: 2560Mi
+  storageClassName: local-path
 
-# persistence:
-#   enabled: false
-#   storageClass: ""
-#   accessModes:
-#     - ReadWriteOnce
-#   size: 8Gi
+agent:
+  enabled: true
+  image:
+    repository: jenkins/inbound-agent
+    tag: "latest"
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+resources:
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    cpu: 1000m
+    memory: 1Gi
