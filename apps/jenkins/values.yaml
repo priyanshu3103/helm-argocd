@@ -11,7 +11,7 @@ ingress:
 
 # Your chart uses these directly
 replicaCount: 1
-replicasethistorylimit: 4
+revisionHistoryLimit: 4
 # Resource overrides for Jenkins controller pod
 resources:
   requests:
