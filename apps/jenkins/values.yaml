@@ -13,6 +13,8 @@ ingress:
 
 agent:
   enabled: true
+  alwaysPullImage: false
+  idleMinutes: 5
   image:
     repository: priyanshu30/jenkins-mysql
     tag: "tag-2"
