@@ -49,7 +49,7 @@ readinessProbe:
   periodSeconds: 10
 
 # Agent resources override (this goes into casc ConfigMap)
-casc:
+configMapData:
   jenkins.yaml: |
     jenkins:
       clouds:
