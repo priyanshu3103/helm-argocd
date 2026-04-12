@@ -1,6 +1,6 @@
 # Override the fullname to just "jenkins"
 # nameOverride: ""
-# fullnameOverride: ""
+fullnameOverride: "jenkins-jenkins"
 
 ingress:
   enabled: true
