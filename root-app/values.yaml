@@ -7,5 +7,5 @@ applicationSet:
     - name: jenkins
       namespace: devops-tools
       chart: jenkins
-      version: 0.2.70
+      version: 0.2.71
       disableAutoSync: true
