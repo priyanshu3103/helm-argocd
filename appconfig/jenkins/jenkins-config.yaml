@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: jenkins-custom-config
+  name: jenkins-app-config
   namespace: devops-tools
 data:
   JENKINS_URL: "http://jenkins.devops-tools.svc.cluster.local:8080"
   JENKINS_HOME: "/opt/jenkins_home"
   JENKINS_INSTALL_PLUGINS: "git,workflow-aggregator,docker-plugin"
   JENKINS_ADMIN_USER: "admin"
-  JENKINS_ADMIN_PASSWORD: "admin123"
