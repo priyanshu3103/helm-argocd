@@ -1,3 +1,7 @@
+# Override the fullname to just "jenkins"
+nameOverride: ""
+fullnameOverride: "jenkins"
+
 ingress:
   enabled: true
   className: ""
@@ -27,30 +31,6 @@ resources:
   limits:
     cpu: 1000m
     memory: 1Gi
-
-# Probe overrides
-# startupProbe:
-#   httpGet:
-#     path: /login
-#     port: 8080
-#   failureThreshold: 30
-#   periodSeconds: 10
-
-# livenessProbe:
-#   httpGet:
-#     path: /login
-#     port: 8080
-#   initialDelaySeconds: 120
-#   timeoutSeconds: 10
-#   periodSeconds: 30
-
-# readinessProbe:
-#   httpGet:
-#     path: /login
-#     port: 8080
-#   initialDelaySeconds: 60
-#   timeoutSeconds: 5
-#   periodSeconds: 10
 
 
 probes:
