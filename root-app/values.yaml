@@ -9,3 +9,9 @@ applicationSet:
       chart: jenkins
       version: 0.2.71
       disableAutoSync: true
+
+    - name: chartmuseum
+      namespace: devops-tools
+      chart: chartmuseum
+      version: 3.10.1
+      disableAutoSync: false

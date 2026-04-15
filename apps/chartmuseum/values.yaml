@@ -1,0 +1,45 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/helm/chartmuseum
+  tag: v0.16.2
+  pullPolicy: IfNotPresent
+
+env:
+  open:
+    STORAGE: amazon
+    STORAGE_AMAZON_BUCKET: priyanshu-helm-charts
+    STORAGE_AMAZON_PREFIX: charts
+    STORAGE_AMAZON_REGION: ap-south-1
+    DISABLE_API: "false"
+    ALLOW_OVERWRITE: "true"
+    AUTH_ANONYMOUS_GET: "true"
+  secret:
+    AWS_ACCESS_KEY_ID: ""
+    AWS_SECRET_ACCESS_KEY: ""
+
+extraEnvVarsSecret: chartmuseum-aws-credentials
+
+persistence:
+    enabled: false
+
+ingress:
+  enabled: true
+  ingressClassName: ""
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "false"
+  hosts:
+    - name: chartmuseum.localhost
+      path: /
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
