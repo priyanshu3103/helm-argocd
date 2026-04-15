@@ -3,6 +3,7 @@ applicationSet:
   repo: https://github.com/priyanshu3103/helm-argocd.git
   revision: HEAD
   chartsRepo: https://priyanshu3103.github.io/helm-charts
+  chartmuseumRepo: https://chartmuseum.github.io/charts
   apps:
     - name: jenkins
       namespace: devops-tools
