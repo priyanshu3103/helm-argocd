@@ -5,7 +5,7 @@ ingress:
     # This is the "magic" line for Traefik to fix the 500 error
     traefik.ingress.kubernetes.io/service.serversscheme: "https"
     # This tells Traefik to ignore the 'bad certificate' from the pod
-    traefik.ingress.kubernetes.io/service.serverstransport: "insecure-transport@clusterfile"
+    traefik.ingress.kubernetes.io/service.serverstransport: devops-tools-k8s-dashboard-insecure-transport@kubernetescrd
     #traefik.ingress.kubernetes.io/router.tls: "false"
   hosts:
     - host: k8sdashboard.localhost
