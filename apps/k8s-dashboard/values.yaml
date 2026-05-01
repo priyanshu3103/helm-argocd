@@ -17,4 +17,4 @@ ingress:
             service:
               name: k8s-dashboard
               port:
-                number: https
+                number: 8443
