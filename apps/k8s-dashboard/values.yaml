@@ -2,11 +2,14 @@ ingress:
   enabled: true
   className: "traefik"
   annotations:
-  traefik.ingress.kubernetes.io/router.entrypoints: web
-  # Ensure Traefik knows this is a secure backend
-  traefik.ingress.kubernetes.io/service.serversscheme: https
-  # Link to your transport (matches your successful log state)
-  traefik.ingress.kubernetes.io/service.serverstransport: devops-tools-k8s-dashboard-insecure-transport@kubernetescrd
+    # CHANGE THIS: Allow traffic on HTTPS (websecure)
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    
+    # Enable TLS termination at Traefik
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    
+    # Keep these (Backend Connection Settings)
+    traefik.ingress.kubernetes.io/service.serversscheme: https
 
   hosts:
     - host: k8sdashboard.localhost
