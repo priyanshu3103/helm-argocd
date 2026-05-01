@@ -3,8 +3,14 @@ ingress:
   className: ""
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "false"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
   hosts:
     - host: k8sdashboard.localhost
       paths:
         - path: /
           pathType: Prefix
+          backend:
+          service:
+            name: kubernetes-dashboard
+            port:
+              number: 8443
