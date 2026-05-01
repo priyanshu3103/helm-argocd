@@ -1,16 +1,19 @@
 ingress:
   enabled: true
-  className: ""
+  className: "traefik"
   annotations:
+    # Explicitly set the backend protocol to HTTP
+    traefik.ingress.kubernetes.io/service.serversscheme: "http"
+    # Ensure TLS is disabled for the router since dashboard is serving insecurely
     traefik.ingress.kubernetes.io/router.tls: "false"
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
   hosts:
     - host: k8sdashboard.localhost
       paths:
         - path: /
           pathType: Prefix
+          # IMPORTANT: Point specifically to the service port that maps to 8443
           backend:
-          service:
-            name: kubernetes-dashboard
-            port:
-              number: 8443
+            service:
+              name: kubernetes-dashboard 
+              port:
+                number: 8443 
