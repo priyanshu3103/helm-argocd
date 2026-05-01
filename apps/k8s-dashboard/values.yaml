@@ -4,7 +4,7 @@ ingress:
   annotations:
     # This is the "magic" line for Traefik to fix the 500 error
     traefik.ingress.kubernetes.io/service.serversscheme: "http"
-    traefik.ingress.kubernetes.io/router.tls: "false"
+    #traefik.ingress.kubernetes.io/router.tls: "false"
   hosts:
     - host: k8sdashboard.localhost
       paths:
