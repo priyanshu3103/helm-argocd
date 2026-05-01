@@ -4,12 +4,18 @@ ingress:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/service.serversscheme: https
+    traefik.ingress.kubernetes.io/service.serverstransport: <YOUR-TRANSPORT>@kubernetescrd
+
   hosts:
     - host: k8sdashboard.localhost
       paths:
         - path: /
-          pathType: Prefix   # ✅ FIX HERE
+          pathType: Prefix
+
   tls:
     - hosts:
         - k8sdashboard.localhost
-      secretName: k8s-dashboard-tls
+
+service:
+  port: 8443
