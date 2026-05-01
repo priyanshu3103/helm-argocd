@@ -2,13 +2,8 @@ ingress:
   enabled: true
   className: "traefik"
   annotations:
-    # CHANGE THIS: Allow traffic on HTTPS (websecure)
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    
-    # Enable TLS termination at Traefik
     traefik.ingress.kubernetes.io/router.tls: "true"
-    
-    # Backend communication (Keep these)
     traefik.ingress.kubernetes.io/service.serversscheme: https
     traefik.ingress.kubernetes.io/service.serverstransport: devops-tools-k8s-dashboard-insecure-transport@kubernetescrd
   hosts:
@@ -16,8 +11,7 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
-          backend:
-            service:
-              name: k8s-dashboard
-              port:
-                number: 8443
+  # ADD THIS BLOCK TO ENABLE PORT 443
+  tls:
+    - hosts:
+        - k8sdashboard.localhost
