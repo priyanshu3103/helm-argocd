@@ -12,10 +12,5 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
-
-  tls:
-    - hosts:
-        - k8sdashboard.localhost
-
 service:
   port: 8443
