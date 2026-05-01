@@ -1,0 +1,10 @@
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "false"
+  hosts:
+    - host: k8sdashboard.localhost
+      paths:
+        - path: /
+          pathType: Prefix

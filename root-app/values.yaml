@@ -9,3 +9,8 @@ applicationSet:
       chart: jenkins
       version: 0.2.71
       disableAutoSync: true
+    - name: k8s-dashboard
+      namespace: devops-tools
+      chart: k8s-dashboard
+      version: 0.1.0
+      disableAutoSync: true
