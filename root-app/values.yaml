@@ -12,5 +12,5 @@ applicationSet:
     - name: k8s-dashboard
       namespace: devops-tools
       chart: k8s-dashboard
-      version: 0.1.17
+      version: 0.1.18
       disableAutoSync: true
