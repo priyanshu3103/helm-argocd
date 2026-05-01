@@ -5,7 +5,7 @@ ingress:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/service.serversscheme: https
-    traefik.ingress.kubernetes.io/service.serverstransport: <YOUR-TRANSPORT>@kubernetescrd
+    traefik.ingress.kubernetes.io/service.serverstransport: k8s-dashboard-insecure-transport@kubernetescrd
 
   hosts:
     - host: k8sdashboard.localhost
