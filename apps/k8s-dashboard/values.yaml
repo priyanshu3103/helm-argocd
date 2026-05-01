@@ -8,9 +8,8 @@ ingress:
     - host: k8sdashboard.localhost
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix   # ✅ FIX HERE
   tls:
     - hosts:
         - k8sdashboard.localhost
-      # If you don't have a real cert, Traefik uses its default self-signed one
-      secretName: k8s-dashboard-tls 
+      secretName: k8s-dashboard-tls
