@@ -1,17 +1,13 @@
 ingress:
   enabled: true
   className: "traefik"
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
-    traefik.ingress.kubernetes.io/service.serversscheme: https
-    traefik.ingress.kubernetes.io/service.serverstransport: devops-tools-k8s-dashboard-insecure-transport@kubernetescrd
   hosts:
     - host: k8sdashboard.localhost
       paths:
         - path: /
           pathType: Prefix
-  # ADD THIS BLOCK TO ENABLE PORT 443
   tls:
     - hosts:
         - k8sdashboard.localhost
+      # If you don't have a real cert, Traefik uses its default self-signed one
+      secretName: k8s-dashboard-tls 
