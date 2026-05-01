@@ -8,7 +8,7 @@ ingress:
     - host: k8sdashboard.localhost
       paths:
         - path: /
-          pathType: Prefix
+          pathType: ImplementationSpecific
   tls:
     - hosts:
         - k8sdashboard.localhost
