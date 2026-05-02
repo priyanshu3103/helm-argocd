@@ -1,53 +1,51 @@
 ingress:
   enabled: true
+  host: k8sdashboard.localhost
   entryPoints:
-    - web
-  scheme: http  # Force HTTP (critical for insecure dashboard)
-  hosts:
-    - host: k8sdashboard.localhost
-      paths:
-        - path: /
-          pathType: Prefix
-  # Optional: Add middlewares if needed
-  # middlewares:
-  #   - name: my-middleware
-  #     namespace: default
-  annotations: {}
+    - websecure  # HTTPS entry point
+  scheme: https
+  annotations:
+    traefik.ingress.kubernetes.io/router.tls: "true"
   # Additional annotations if needed
   # traefik.ingress.kubernetes.io/router.entrypoints: web
 
 service:
   type: ClusterIP
-  port: 9090
-  targetPort: 9090  # Make sure this is explicit
-  # Remove any annotations from service section
+  port: 8443
+  targetPort: 8443
   annotations: {}
 
 args:
   - --namespace=devops-tools
-  - --enable-insecure-login
-  - --insecure-bind-address=0.0.0.0
-  - --insecure-port=9090
-  - --port=0  # Disable HTTPS port
+  - --auto-generate-certificates  # Auto-generate self-signed cert
+  - --bind-address=0.0.0.0
+  - --port=8443  # Use HTTPS port
 
 # Override liveness/readiness probes
 # In your values.yaml
-# Liveness probe configuration
 livenessProbe:
   path: "/"
-  port: 9090
-  scheme: "HTTP"
+  port: 8443
+  scheme: "HTTPS"
   initialDelaySeconds: 30
   timeoutSeconds: 30
   periodSeconds: 10
   failureThreshold: 3
 
-# Readiness probe configuration (if your chart has it)
 readinessProbe:
   path: "/"
-  port: 9090
-  scheme: "HTTP"
+  port: 8443
+  scheme: "HTTPS"
   initialDelaySeconds: 30
   timeoutSeconds: 30
   periodSeconds: 10
   failureThreshold: 3
+
+serviceAccount:
+  create: true
+  name: k8s-dashboard-admin  # Optional, will use fullname if not set
+
+# RBAC configuration
+rbac:
+  create: true
+  clusterRole: "cluster-admin"  # Optional, defaults to cluster-admin
