@@ -9,6 +9,10 @@ ingress:
   # Additional annotations if needed
   # traefik.ingress.kubernetes.io/router.entrypoints: web
 
+# Your chart uses these directly
+replicaCount: 2
+revisionHistoryLimit: 4
+
 serversTransport:
   create: true
   insecureSkipVerify: true
