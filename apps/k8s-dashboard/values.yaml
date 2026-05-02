@@ -4,7 +4,7 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: traefik   # 🔥 ADD THIS
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/router.tls: true
     traefik.ingress.kubernetes.io/service.serversscheme: https
     traefik.ingress.kubernetes.io/service.serverstransport: devops-tools-k8s-dashboard-insecure-transport@kubernetescrd
 
