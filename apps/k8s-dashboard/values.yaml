@@ -27,4 +27,5 @@ livenessProbe:
 
 service:
   type: ClusterIP
-  port: 9090  # Match the insecure port
+  port: 9090
+  targetPort: 9090
