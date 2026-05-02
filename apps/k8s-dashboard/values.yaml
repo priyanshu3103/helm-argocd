@@ -47,7 +47,7 @@ readinessProbe:
 
 serviceAccount:
   create: true
-  name: k8s-dashboard-admin  # Optional, will use fullname if not set
+  name: {}  # Optional, will use fullname if not set
 
 # RBAC configuration
 rbac:
