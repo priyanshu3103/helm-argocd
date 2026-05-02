@@ -28,24 +28,22 @@ args:
 
 # Override liveness/readiness probes
 # In your values.yaml
+# Liveness probe configuration
 livenessProbe:
-  enabled: true
+  path: "/"
+  port: 9090
+  scheme: "HTTP"
   initialDelaySeconds: 30
-  periodSeconds: 10
   timeoutSeconds: 30
+  periodSeconds: 10
   failureThreshold: 3
-  httpGet:
-    path: /
-    port: 9090
-    scheme: HTTP
 
+# Readiness probe configuration (if your chart has it)
 readinessProbe:
-  enabled: true
+  path: "/"
+  port: 9090
+  scheme: "HTTP"
   initialDelaySeconds: 30
-  periodSeconds: 10
   timeoutSeconds: 30
+  periodSeconds: 10
   failureThreshold: 3
-  httpGet:
-    path: /
-    port: 9090
-    scheme: HTTP
