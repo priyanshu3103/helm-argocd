@@ -27,18 +27,25 @@ args:
   - --port=0  # Disable HTTPS port
 
 # Override liveness/readiness probes
+# In your values.yaml
 livenessProbe:
-  httpGet:
-    scheme: HTTP
-    port: 9090
-    path: /
+  enabled: true
   initialDelaySeconds: 30
   periodSeconds: 10
+  timeoutSeconds: 30
+  failureThreshold: 3
+  httpGet:
+    path: /
+    port: 9090
+    scheme: HTTP
 
 readinessProbe:
-  httpGet:
-    scheme: HTTP
-    port: 9090
-    path: /
+  enabled: true
   initialDelaySeconds: 30
   periodSeconds: 10
+  timeoutSeconds: 30
+  failureThreshold: 3
+  httpGet:
+    path: /
+    port: 9090
+    scheme: HTTP
