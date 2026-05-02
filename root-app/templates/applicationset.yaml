@@ -25,7 +25,6 @@ spec:
             chart: {{ .chart }}
             version: {{ .version | quote }}
           {{- end }}
-  generators:
     - git:
         repoURL: {{ .Values.applicationSet.repo }}
         revision: {{ .Values.applicationSet.revision }}
@@ -84,7 +83,6 @@ spec:
             chart: {{ .chart }}
             version: {{ .version | quote }}
           {{- end }}
-  generators:
     - git:
         repoURL: {{ .Values.applicationSet.repo }}
         revision: {{ .Values.applicationSet.revision }}
