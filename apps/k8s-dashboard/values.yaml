@@ -4,13 +4,18 @@ ingress:
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "false"
     traefik.ingress.kubernetes.io/router.entrypoints: "web"
-    # Delete the serverstransport annotation entirely
+    # Remove ALL annotations about serversscheme and serverstransport
   hosts:
     - host: k8sdashboard.localhost
       paths:
         - path: /
           pathType: Prefix
 
+args:
+  - --enable-insecure-login
+  - --insecure-bind-address=0.0.0.0
+  - --insecure-port=9090
+
 service:
   type: ClusterIP
-  port: 9090  # Must match your insecure port
+  port: 9090  # Match the insecure port
