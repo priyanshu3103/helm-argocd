@@ -12,9 +12,18 @@ ingress:
           pathType: Prefix
 
 args:
+  - --namespace=devops-tools
   - --enable-insecure-login
   - --insecure-bind-address=0.0.0.0
   - --insecure-port=9090
+  - --port=0  # Disable the HTTPS port (0 means disabled)
+
+# Also need to update the liveness probe to use HTTP
+livenessProbe:
+  httpGet:
+    scheme: HTTP  # Change from HTTPS to HTTP
+    port: 9090    # Use the insecure port
+    path: /
 
 service:
   type: ClusterIP
