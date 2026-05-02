@@ -1,10 +1,10 @@
 ingress:
   enabled: true
-  className: ""
+  className: "traefik"
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "false"
     traefik.ingress.kubernetes.io/router.entrypoints: "web"
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    traefik.ingress.kubernetes.io/service.serversscheme: "https"
   hosts:
     - host: k8sdashboard.localhost
       paths:
