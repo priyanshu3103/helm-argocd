@@ -45,9 +45,6 @@ readinessProbe:
   periodSeconds: 10
   failureThreshold: 3
 
-serviceAccount:
-  create: true
-  name: {}  # Optional, will use fullname if not set
 
 # RBAC configuration
 rbac:
