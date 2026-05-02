@@ -1,19 +1,82 @@
+{{- $autoSyncApps := list }}
+{{- $manualApps := list }}
+{{- range .Values.applicationSet.apps }}
+  {{- if .disableAutoSync }}
+    {{- $manualApps = append $manualApps . }}
+  {{- else }}
+    {{- $autoSyncApps = append $autoSyncApps . }}
+  {{- end }}
+{{- end }}
+
+# ==================== Auto Sync ApplicationSet ====================
+{{- if $autoSyncApps }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: {{ .Values.applicationSet.name }}
+  name: {{ .Values.applicationSet.name }}-autosync
   namespace: argocd
 spec:
   generators:
     - list:
         elements:
-          {{- range .Values.applicationSet.apps }}
+          {{- range $autoSyncApps }}
           - name: {{ .name }}
             namespace: {{ .namespace }}
             chart: {{ .chart }}
             version: {{ .version | quote }}
-            selfHeal: {{ .disableAutoSync | default false | not | quote }}
-            prune: {{ .disableAutoSync | default false | not | quote }}
+          {{- end }}
+  template:
+    metadata:
+      name: "{{`{{name}}`}}"
+    spec:
+      project: default
+      sources:
+        - repoURL: {{ .Values.applicationSet.chartsRepo }}
+          chart: "{{`{{chart}}`}}"
+          targetRevision: "{{`{{version}}`}}"     # ← This controls chart version upgrade
+          helm:
+            valueFiles:
+              - $values/apps/{{`{{name}}`}}/values.yaml
+
+        # Git repo for values + appconfig (this will react to git changes)
+        - repoURL: {{ .Values.applicationSet.repo }}
+          targetRevision: {{ .Values.applicationSet.revision }}
+          ref: values
+        - repoURL: {{ .Values.applicationSet.repo }}
+          targetRevision: {{ .Values.applicationSet.revision }}
+          path: appconfig/{{`{{name}}`}}
+          ref: values
+
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "{{`{{namespace}}`}}"
+
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
+          - ServerSideApply=true
+{{- end }}
+
+---
+# ==================== Manual Sync ApplicationSet ====================
+{{- if $manualApps }}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: {{ .Values.applicationSet.name }}-manual
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          {{- range $manualApps }}
+          - name: {{ .name }}
+            namespace: {{ .namespace }}
+            chart: {{ .chart }}
+            version: {{ .version | quote }}
           {{- end }}
   template:
     metadata:
@@ -27,19 +90,20 @@ spec:
           helm:
             valueFiles:
               - $values/apps/{{`{{name}}`}}/values.yaml
+
         - repoURL: {{ .Values.applicationSet.repo }}
           targetRevision: {{ .Values.applicationSet.revision }}
           ref: values
         - repoURL: {{ .Values.applicationSet.repo }}
           targetRevision: {{ .Values.applicationSet.revision }}
           path: appconfig/{{`{{name}}`}}
+
       destination:
         server: https://kubernetes.default.svc
         namespace: "{{`{{namespace}}`}}"
+
       syncPolicy:
-        automated:
-          selfHeal: "{{`{{selfHeal}}`}}"
-          prune: "{{`{{prune}}`}}"
         syncOptions:
           - CreateNamespace=true
           - ServerSideApply=true
+{{- end }}
