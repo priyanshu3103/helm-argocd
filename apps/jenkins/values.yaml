@@ -21,7 +21,7 @@ deploymentStrategy:
     maxUnavailable: 25%
 
 # Your chart uses these directly
-replicaCount: 1
+replicaCount: 5
 revisionHistoryLimit: 4
 # Resource overrides for Jenkins controller pod
 resources:
