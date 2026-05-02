@@ -2,6 +2,7 @@ ingress:
   enabled: true
   className: "traefik"
   annotations:
+    kubernetes.io/ingress.class: traefik   # 🔥 ADD THIS
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
     traefik.ingress.kubernetes.io/service.serversscheme: https
@@ -9,7 +10,7 @@ ingress:
   hosts:
     - host: k8sdashboard.localhost
       paths:
-        - path: /
+        - path: /k8sdashboard
           pathType: Prefix
 service:
   port: 8443
