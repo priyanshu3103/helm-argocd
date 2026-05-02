@@ -6,7 +6,7 @@ ingress:
     traefik.ingress.kubernetes.io/router.entrypoints: "web"
     # Remove these entirely - not needed for HTTP
     # traefik.ingress.kubernetes.io/service.serversscheme: "https"
-    # traefik.ingress.kubernetes.io/service.serverstransport: "kube-system-k8s-dashboard-insecure-transport@kubernetescrd"
+    traefik.ingress.kubernetes.io/service.serverstransport: "k8s-dashboard-insecure-transport@kubernetescrd"
   hosts:
     - host: k8sdashboard.localhost
       paths:
