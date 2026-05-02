@@ -1,4 +1,24 @@
-# values.yaml
+ingress:
+  enabled: true
+  className: "traefik"
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.entrypoints: "web"
+    traefik.ingress.kubernetes.io/router.tls: "false"
+    traefik.ingress.kubernetes.io/service.serversscheme: "http"
+  hosts:
+    - host: k8sdashboard.localhost
+      paths:
+        - path: /
+          pathType: Prefix
+
+service:
+  type: ClusterIP
+  port: 9090
+  targetPort: 9090  # Make sure this is explicit
+  # Remove any annotations from service section
+  annotations: {}
+
 args:
   - --namespace=devops-tools
   - --enable-insecure-login
@@ -6,28 +26,7 @@ args:
   - --insecure-port=9090
   - --port=0  # Disable HTTPS port
 
-service:
-  name: k8s-dashboard
-  type: ClusterIP
-  portname: http
-  protocol: TCP
-  port: 9090
-  targetPort: 9090
-
-ingress:
-  enabled: true
-  className: "traefik"
-  annotations:
-    traefik.ingress.kubernetes.io/router.tls: "false"
-    traefik.ingress.kubernetes.io/router.entrypoints: "web"
-    traefik.ingress.kubernetes.io/service.serversscheme: http
-  hosts:
-    - host: k8sdashboard.localhost
-      paths:
-        - path: /
-          pathType: Prefix
-
-# Override liveness probe to use HTTP
+# Override liveness/readiness probes
 livenessProbe:
   httpGet:
     scheme: HTTP
