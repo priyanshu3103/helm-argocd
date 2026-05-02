@@ -3,14 +3,20 @@ ingress:
   className: "traefik"
   annotations:
     traefik.ingress.kubernetes.io/router.tls: "false"
-    traefik.ingress.kubernetes.io/router.entrypoints: "web"
-    traefik.ingress.kubernetes.io/service.serversscheme: "https"
-    traefik.ingress.kubernetes.io/service.serverstransport: "kube-system-k8s-dashboard-insecure-transport@kubernetescrd"
+    # traefik.ingress.kubernetes.io/router.entrypoints: "web"
+    # traefik.ingress.kubernetes.io/service.serversscheme: "https"
+    # traefik.ingress.kubernetes.io/service.serverstransport: "kube-system-k8s-dashboard-insecure-transport@kubernetescrd"
   hosts:
     - host: k8sdashboard.localhost
       paths:
         - path: /
           pathType: Prefix
+
+args:
+  - --enable-insecure-login
+  - --insecure-bind-address=0.0.0.0
+  - --insecure-port=9090
+
+
 service:
-  type: ClusterIP
-  port: 8443
+  port: 9090
