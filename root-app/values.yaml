@@ -3,14 +3,14 @@ applicationSet:
   repo: https://github.com/priyanshu3103/helm-argocd.git
   revision: HEAD
   chartsRepo: https://priyanshu3103.github.io/helm-charts
-  # apps:
-  #   - name: jenkins
-  #     namespace: devops-tools
-  #     chart: jenkins
-  #     version: 0.2.71
-  #     disableAutoSync: true
-  #   - name: k8s-dashboard
-  #     namespace: devops-tools
-  #     chart: k8s-dashboard
-  #     version: 0.1.34
-  #     disableAutoSync: true
+  apps:
+    - name: jenkins
+      namespace: devops-tools
+      chart: jenkins
+      version: 0.2.71
+      disableAutoSync: true
+    - name: k8s-dashboard
+      namespace: devops-tools
+      chart: k8s-dashboard
+      version: 0.1.34
+      disableAutoSync: true
