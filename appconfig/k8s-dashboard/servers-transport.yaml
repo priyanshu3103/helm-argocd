@@ -1,7 +1,7 @@
-apiVersion: traefik.io/v1alpha1
-kind: ServersTransport
+apiVersion: traefik.containo.us/v1alpha1
+kind: TraefikService
 metadata:
   name: k8s-dashboard-insecure-transport
-  namespace: kube-system
 spec:
-  insecureSkipVerify: true
+  serverTransport:
+    insecureSkipVerify: true  # Only for testing!
