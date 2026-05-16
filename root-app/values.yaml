@@ -14,3 +14,9 @@ applicationSet:
       chart: k8s-dashboard
       version: 0.1.34
       disableAutoSync: true
+    - name: chartmuseum
+      chartsRepo: https://chartmuseum.github.io/charts
+      namespace: chartmuseum
+      chart: chartmuseum
+      version: 0.2.24
+      disableAutoSync: true
