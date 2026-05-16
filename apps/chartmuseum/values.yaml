@@ -7,11 +7,11 @@ image:
   pullPolicy: IfNotPresent
 
 # Persistence for charts
-persistence:
-  enabled: true
-  size: 10Gi
-  accessMode: ReadWriteOnce
-  storageClassName: standard
+# persistence:
+#   enabled: true
+#   size: 10Gi
+#   accessMode: ReadWriteOnce
+#   storageClassName: standard
 
 # Resource limits
 resources:
@@ -21,7 +21,7 @@ resources:
   limits:
     memory: "512Mi"
     cpu: "500m"
-    
+
 # In your chartmuseum app values
 ingress:
   enabled: true
