@@ -1,7 +1,7 @@
 # In your chartmuseum app values
 ingress:
   enabled: true
-  ingressClassName: nginx
+  ingressClassName: traefik
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "100m"
   hosts:
