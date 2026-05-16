@@ -4,15 +4,25 @@ metadata:
   name: chartmuseum-config
   namespace: chartmuseum
 data:
-  # Simple format (without CHARTMUSEUM_ prefix - ChartMuseum auto-detects)
+  # API Configuration - Set DISABLE_API to false (NOT true!)
+  DISABLE_API: "false"
   ENABLE_API: "true"
+  CHARTMUSEUM_ENABLE_API: "true"
+  
+  # Authentication
   AUTH_ANONYMOUS_GET: "true"
+  CHARTMUSEUM_AUTH_ANONYMOUS_GET: "true"
+  
+  # Storage Configuration
   STORAGE: "local"
   STORAGE_LOCAL_ROOTDIR: "/charts"
-  DEBUG: "true"
-  
-  # Or use the prefixed format (both work)
-  CHARTMUSEUM_ENABLE_API: "true"
-  CHARTMUSEUM_AUTH_ANONYMOUS_GET: "true"
   CHARTMUSEUM_STORAGE: "local"
   CHARTMUSEUM_STORAGE_LOCAL_ROOTDIR: "/charts"
+  
+  # Form field names
+  CHART_POST_FORM_FIELD_NAME: "chart"
+  PROV_POST_FORM_FIELD_NAME: "prov"
+  
+  # Logging
+  LOG_JSON: "true"
+  DEBUG: "true"
