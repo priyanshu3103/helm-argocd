@@ -1,3 +1,6 @@
+# Your chart uses these directly
+replicaCount: 1
+revisionHistoryLimit: 4
 # In your chartmuseum app values
 ingress:
   enabled: true
