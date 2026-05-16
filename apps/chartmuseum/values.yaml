@@ -14,12 +14,15 @@ ingress:
               name: chartmuseum
               port:
                 number: 8080
-spec:
-  template:
-    spec:
-      containers:
-      - name: chartmuseum
-        image: ghcr.io/helm/chartmuseum:latest
-        envFrom:
-        - configMapRef:
-            name: chartmuseum-config
+deployment:
+  # Override deployment spec
+  spec:
+    template:
+      spec:
+        containers:
+          - name: chartmuseum
+            image: ghcr.io/helm/chartmuseum:latest
+            imagePullPolicy: IfNotPresent
+            envFrom:
+              - configMapRef:
+                  name: chartmuseum-config
