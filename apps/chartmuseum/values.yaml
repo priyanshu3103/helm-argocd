@@ -26,6 +26,29 @@ deployment:
           - name: chartmuseum
             image: ghcr.io/helm/chartmuseum:latest
             imagePullPolicy: IfNotPresent
+            replicaCount: 1
+            revisionHistoryLimit: 3
             envFrom:
               - configMapRef:
                   name: chartmuseum-config
+            ports:
+              - containerPort: 8080
+                name: http
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                cpu: 200m
+                memory: 256Mi
+            lifecycle:
+              preStop:
+                exec:
+                  command: ["/bin/sh", "-c", "sleep 5"]
+                postStart:
+                  exec:
+                    command: ["/bin/sh", "-c", "echo 'ChartMuseum is starting'"]
+            startupProbe:
+              httpGet:
+                path: /health
+                port: http
