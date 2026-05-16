@@ -1,10 +1,6 @@
 # Your chart uses these directly
 replicaCount: 1
 revisionHistoryLimit: 4
-image:
-  repository: ghcr.io/helm/chartmuseum
-  tag: latest
-  pullPolicy: IfNotPresent
 
 # Persistence for charts
 # persistence:
