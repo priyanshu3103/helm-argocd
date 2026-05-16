@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chartmuseum-config
+  namespace: chartmuseum
+data:
+  # Simple format (without CHARTMUSEUM_ prefix - ChartMuseum auto-detects)
+  ENABLE_API: "true"
+  AUTH_ANONYMOUS_GET: "true"
+  STORAGE: "local"
+  STORAGE_LOCAL_ROOTDIR: "/charts"
+  DEBUG: "true"
+  
+  # Or use the prefixed format (both work)
+  CHARTMUSEUM_ENABLE_API: "true"
+  CHARTMUSEUM_AUTH_ANONYMOUS_GET: "true"
+  CHARTMUSEUM_STORAGE: "local"
+  CHARTMUSEUM_STORAGE_LOCAL_ROOTDIR: "/charts"
