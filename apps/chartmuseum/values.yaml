@@ -1,6 +1,27 @@
 # Your chart uses these directly
 replicaCount: 1
 revisionHistoryLimit: 4
+image:
+  repository: ghcr.io/helm/chartmuseum
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# Persistence for charts
+persistence:
+  enabled: true
+  size: 10Gi
+  accessMode: ReadWriteOnce
+  storageClassName: standard
+
+# Resource limits
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
+    
 # In your chartmuseum app values
 ingress:
   enabled: true
@@ -17,38 +38,3 @@ ingress:
               name: chartmuseum
               port:
                 number: 8080
-deployment:
-  # Override deployment spec
-  spec:
-    template:
-      spec:
-        containers:
-          - name: chartmuseum
-            image: ghcr.io/helm/chartmuseum:latest
-            imagePullPolicy: IfNotPresent
-            replicaCount: 1
-            revisionHistoryLimit: 3
-            envFrom:
-              - configMapRef:
-                  name: chartmuseum-config
-            ports:
-              - containerPort: 8080
-                name: http
-            resources:
-              requests:
-                cpu: 100m
-                memory: 128Mi
-              limits:
-                cpu: 200m
-                memory: 256Mi
-            lifecycle:
-              preStop:
-                exec:
-                  command: ["/bin/sh", "-c", "sleep 5"]
-                postStart:
-                  exec:
-                    command: ["/bin/sh", "-c", "echo 'ChartMuseum is starting'"]
-            startupProbe:
-              httpGet:
-                path: /health
-                port: http
