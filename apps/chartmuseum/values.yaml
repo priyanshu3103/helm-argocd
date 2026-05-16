@@ -1,23 +1,11 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: chartmuseum-ingress
-  namespace: chartmuseum
-
+# In your chartmuseum app values
+ingress:
+  enabled: true
+  ingressClassName: nginx
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "100m"
-
-spec:
-  ingressClassName: nginx
-
-  rules:
-  - host: chartmuseum.localhost
-    http:
+  hosts:
+    - host: chartmuseum.localhost
       paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: chartmuseum
-            port:
-              number: 8080
+        - path: /
+          pathType: Prefix
