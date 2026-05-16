@@ -83,15 +83,18 @@ agent:
 
 tool:
   git:
+    version: "2.40.1" # Specify the Git version you want to use - Change this to the desired Git version
     installations:
       - name: "Default"
         home: "/usr/bin/git"
   jdk:
+    version: "17" # Specify the JDK version you want to use - Change this to the desired JDK version
     installations:
       - name: "jdk17"
         home: "/opt/java/openjdk"
 
   maven:
+    version: "3.9.2" # Specify the Maven version you want to use - Change this to the desired Maven version
     installations:
       - name: "maven3"
         home: "/opt/maven"
