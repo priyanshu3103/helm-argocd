@@ -84,7 +84,7 @@ spec:
             namespace: {{ .namespace }}
             chart: {{ .chart }}
             version: {{ .version | quote }}
-            chartsRepo: "{{ .chartsRepo | default $.Values.applicationSet.chartsRepo }}"
+            chartsRepo: {{ .chartsRepo | default $.Values.applicationSet.chartsRepo | quote }}
           {{- end }}
   template:
     metadata:
@@ -92,13 +92,8 @@ spec:
     spec:
       project: default
       sources:
-        # - repoURL: '{{`{{chartsRepo}}`}}'
-        #   chart: "{{`{{chart}}`}}"
-        #   targetRevision: "{{`{{version}}`}}"
-        #   helm:
-        #     valueFiles:
-        #       - $values/apps/{{`{{name}}`}}/values.yaml
-        - repoURL: "{{`{{.chartsRepo}}`}}"
+        # CORRECTED: Don't add oci://, use chartsRepo as-is (should be HTTP URL)
+        - repoURL: "{{`{{chartsRepo}}`}}"  # REMOVED the extra . before chartsRepo
           chart: "{{`{{chart}}`}}"
           targetRevision: "{{`{{version}}`}}"
           helm:
@@ -108,6 +103,7 @@ spec:
         - repoURL: {{ .Values.applicationSet.repo }}
           targetRevision: {{ .Values.applicationSet.revision }}
           ref: values
+        
         - repoURL: {{ .Values.applicationSet.repo }}
           targetRevision: {{ .Values.applicationSet.revision }}
           path: appconfig/{{`{{name}}`}}
