@@ -3,9 +3,23 @@ ingress:
   enabled: true
   ingressClassName: traefik
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+    traefik.ingress.kubernetes.io/proxy-body-size: "100m"
   hosts:
     - host: chartmuseum.localhost
       paths:
         - path: /
           pathType: Prefix
+          backend:
+            service:
+              name: chartmuseum
+              port:
+                number: 8080
+spec:
+  template:
+    spec:
+      containers:
+      - name: chartmuseum
+        image: ghcr.io/helm/chartmuseum:latest
+        envFrom:
+        - configMapRef:
+            name: chartmuseum-config
