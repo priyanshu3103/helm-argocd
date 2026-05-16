@@ -1,7 +1,12 @@
 # Your chart uses these directly
 replicaCount: 1
 revisionHistoryLimit: 4
-
+env:
+    open:
+      DISABLE_API: false
+      AUTH_ANONYMOUS_GET: true
+      STORAGE: local
+      STORAGE_LOCAL_ROOTDIR: /charts
 # Persistence for charts
 # persistence:
 #   enabled: true
