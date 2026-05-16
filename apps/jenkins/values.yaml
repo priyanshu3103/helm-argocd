@@ -69,7 +69,8 @@ cloud:
 agent:
   label: "jenkins-agent"
   idleMinutes: 5
-  image: "priyanshu30/jenkins-mysql:tag-2"
+  repository: jenkins/inbound-agent
+  tag: "latest-jdk17"
   workingDir: "/home/jenkins/agent"
   ttyEnabled: false
   resources:
