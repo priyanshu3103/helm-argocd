@@ -79,3 +79,22 @@ agent:
     limits:
       cpu: "500m"
       memory: "512Mi"
+
+tool:
+  git:
+    installations:
+      - name: "Default"
+        home: "/usr/bin/git"
+  mysql:
+    installations:
+      - name: "mysql8"
+        home: "/usr/bin/mysql"
+  jdk:
+    installations:
+      - name: "jdk17"
+        home: "/opt/java/openjdk"
+
+  maven:
+    installations:
+      - name: "maven3"
+        home: "/opt/maven"
