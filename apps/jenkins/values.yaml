@@ -85,10 +85,6 @@ tool:
     installations:
       - name: "Default"
         home: "/usr/bin/git"
-  mysql:
-    installations:
-      - name: "mysql8"
-        home: "/usr/bin/mysql"
   jdk:
     installations:
       - name: "jdk17"
