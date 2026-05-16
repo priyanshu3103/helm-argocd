@@ -81,7 +81,7 @@ agent:
       cpu: "500m"
       memory: "512Mi"
 
-tool:
+tools:
   git:
     version: "2.40.1" # Specify the Git version you want to use - Change this to the desired Git version
     installations:
