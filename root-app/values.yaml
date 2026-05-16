@@ -7,7 +7,7 @@ applicationSet:
     - name: jenkins
       namespace: devops-tools
       chart: jenkins
-      version: 0.2.75
+      version: 0.2.76
       disableAutoSync: true
     - name: k8s-dashboard
       namespace: devops-tools
