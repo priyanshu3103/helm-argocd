@@ -24,6 +24,7 @@ spec:
             namespace: {{ .namespace }}
             chart: {{ .chart }}
             version: {{ .version | quote }}
+            chartsRepo: {{ .chartsRepo | default $.Values.applicationSet.chartsRepo }}
           {{- end }}
   template:
     metadata:
@@ -83,6 +84,7 @@ spec:
             namespace: {{ .namespace }}
             chart: {{ .chart }}
             version: {{ .version | quote }}
+            chartsRepo: {{ .chartsRepo | default $.Values.applicationSet.chartsRepo }}
           {{- end }}
   template:
     metadata:
@@ -90,12 +92,12 @@ spec:
     spec:
       project: default
       sources:
-        - repoURL: '{{`{{chartsRepo}}`}}'
-          chart: "{{`{{chart}}`}}"
-          targetRevision: "{{`{{version}}`}}"
-          helm:
-            valueFiles:
-              - $values/apps/{{`{{name}}`}}/values.yaml
+        # - repoURL: '{{`{{chartsRepo}}`}}'
+        #   chart: "{{`{{chart}}`}}"
+        #   targetRevision: "{{`{{version}}`}}"
+        #   helm:
+        #     valueFiles:
+        #       - $values/apps/{{`{{name}}`}}/values.yaml
         - repoURL: {{ .Values.applicationSet.chartsRepo }}
           chart: "{{`{{chart}}`}}"
           targetRevision: "{{`{{version}}`}}"
