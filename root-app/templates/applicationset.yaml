@@ -107,7 +107,6 @@ spec:
         - repoURL: {{ .Values.applicationSet.repo }}
           targetRevision: {{ .Values.applicationSet.revision }}
           path: appconfig/{{`{{name}}`}}
-          ref: values
 
       destination:
         server: https://kubernetes.default.svc
