@@ -5,11 +5,13 @@ applicationSet:
   chartsRepo: https://priyanshu3103.github.io/helm-charts
   apps:
     - name: jenkins
+      chartsRepo: http://chartmuseum.chartmuseum.svc.cluster.local:8080
       namespace: devops-tools
       chart: jenkins
       version: 0.2.76
       disableAutoSync: true
     - name: k8s-dashboard
+      chartsRepo: http://chartmuseum.chartmuseum.svc.cluster.local:8080
       namespace: devops-tools
       chart: k8s-dashboard
       version: 0.1.34
