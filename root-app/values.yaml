@@ -20,3 +20,8 @@ applicationSet:
       chart: chartmuseum
       version: 3.10.4
       disableAutoSync: true
+    - name: github-runner
+      namespace: devops-tools
+      chart: github-runner
+      version: "0.1.0"
+      disableAutoSync: "false"
