@@ -1,0 +1,14 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: devops-auth
+  namespace: devops-tools
+spec:
+  method: kubernetes
+  mount: kubernetes
+  kubernetes:
+    role: devops-role
+    serviceAccount: default
+    audiences:
+      - vault
+  vaultConnectionRef: default
