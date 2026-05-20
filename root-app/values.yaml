@@ -29,11 +29,13 @@ applicationSet:
       version: "0.1.0"
       disableAutoSync: "false"
     - name: vault
+      chartsRepo: https://helm.releases.hashicorp.com
       namespace: vault
       chart: vault
       version: "0.28.1"
       disableAutoSync: "false"
     - name: vault-secrets-operator
+      chartsRepo: https://helm.releases.hashicorp.com
       namespace: vault-secrets-operator-system
       chart: vault-secrets-operator
       version: "0.7.1"
