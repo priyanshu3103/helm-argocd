@@ -1,12 +1,14 @@
 runner:
   githubUrl: "https://github.com/priyanshu3103/helm-charts"
   runnerName: "k3d-runner"
-  runs-on:
-  - self-hosted
-  - linux
-  - k3d
+  labels: "k3d,self-hosted,linux"
 env:
   - name: RUNNER_NAME
     value: k3d-runner
   - name: RUNNER_ORG
     value: priyanshu3103
+  - name: RUNNER_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: github-runner-secret
+        key: runner-token
