@@ -7,6 +7,10 @@ env:
     value: k3d-runner
   - name: RUNNER_ORG
     value: priyanshu3103
+  - name: EPHEMERAL
+    value: "true"
+  - name: REPLACE_EXISTING_RUNNER
+    value: "true"
   - name: RUNNER_TOKEN
     valueFrom:
       secretKeyRef:
