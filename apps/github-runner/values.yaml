@@ -6,7 +6,7 @@ env:
   - name: RUNNER_NAME
     value: k3d-runner
   - name: RUNNER_ORG
-    value: priyanshu3103/helm-charts
+    value: priyanshu3103
   - name: EPHEMERAL
     value: "true"
   - name: REPLACE_EXISTING_RUNNER
