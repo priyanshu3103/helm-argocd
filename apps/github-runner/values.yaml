@@ -1,5 +1,5 @@
 runner:
-  githubUrl: "https://github.com/priyanshu3103/helm-charts"
+  githubConfigUrl: "https://github.com/priyanshu3103/helm-charts"
   runnerName: "k3d-runner"
   labels: "k3d,self-hosted,linux"
 env:
