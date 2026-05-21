@@ -16,3 +16,11 @@ env:
       secretKeyRef:
         name: github-runner-secret
         key: runner-token
+
+volumeMounts:
+  - name: github-runner-github-runner 
+    mountPath: /runner
+
+volumes:
+  - name: runner
+    emptyDir: {}
