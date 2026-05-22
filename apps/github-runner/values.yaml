@@ -21,7 +21,7 @@ env:
   - name: RUNNER_SCOPE
     value: "org"
   - name: RUN_AS_ROOT
-    value: "true"
+    value: "false"
   - name: LABELS
     value: "k8s,self-hosted,linux"
   - name: RUNNER_WORKDIR
