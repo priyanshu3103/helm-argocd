@@ -1,3 +1,10 @@
+replicaCount: 1
+revisionHistoryLimit: 5
+
+image:
+  repository: summerwind/actions-runner-dind
+  tag: "latest"
+  pullPolicy: IfNotPresent
 runner:
   githubUrl: "priyanshu3103/helm-charts"
   runnerName: "k8s-github-runner"
