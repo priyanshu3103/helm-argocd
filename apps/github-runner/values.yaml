@@ -9,7 +9,7 @@ runner:
   orgName: "priyanshu-devops-release"
   runnerName: "k8s-github-runner"
   labels: "k8s,self-hosted,linux"
-  ephemeral: "false"
+  ephemeral: "true"
   selfHosted: "true"
   scope: "org"
   replaceExistingRunner: "true"
