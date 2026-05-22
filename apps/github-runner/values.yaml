@@ -5,7 +5,7 @@ runner:
   ephemeral: "true"
   replaceExistingRunner: "true"
   tokenSecretName: github-runner-secret
-  tokenSecretKey: runner-token
+  tokenSecretKey: github_token
 env:
   - name: RUNNER_NAME
     value: k8s-github-runner
