@@ -9,7 +9,7 @@ runner:
   orgName: "priyanshu-devops-release"
   runnerName: "k8s-github-runner"
   labels: "k8s,self-hosted,linux"
-  ephemeral: "true"
+  ephemeral: "false"
   selfHosted: "true"
   scope: "org"
   replaceExistingRunner: "true"
@@ -19,7 +19,7 @@ env:
   - name: RUNNER_NAME
     value: k8s-github-runner
   - name: ORG_NAME
-    value: priyanshu3103
+    value: priyanshu-devops-release
   - name: RUNNER_SCOPE
     value: "org"
   - name: RUN_AS_ROOT
