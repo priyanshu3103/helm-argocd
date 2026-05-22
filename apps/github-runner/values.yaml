@@ -7,10 +7,11 @@ image:
   pullPolicy: IfNotPresent
 runner:
   orgName: "priyanshu3103"
-  # githubUrl: "priyanshu3103"
-  # runnerName: "k8s-github-runner"
-  # labels: "k8s,self-hosted,linux"
+  runnerName: "k8s-github-runner"
+  labels: "k8s,self-hosted,linux"
   ephemeral: "true"
+  selfHosted: "true"
+  scope: "org"
   replaceExistingRunner: "true"
   tokenSecretName: github-runner-secret
   tokenSecretKey: github_token
