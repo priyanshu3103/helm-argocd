@@ -9,7 +9,7 @@ runner:
 env:
   - name: RUNNER_NAME
     value: k8s-github-runner
-  - name: RUNNER_REPO
+  - name: GITHUB_URL
     value: priyanshu3103/helm-charts
   - name: RUNNER_ORG
     value: priyanshu3103
