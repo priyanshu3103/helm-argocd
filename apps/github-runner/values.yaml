@@ -1,5 +1,5 @@
 runner:
-  githubUrl: "priyanshu3103/helm-charts"
+  # githubUrl: "priyanshu3103/helm-charts"
   runnerName: "k8s-github-runner"
   labels: "k8s,self-hosted,linux"
   ephemeral: "true"
@@ -9,6 +9,8 @@ runner:
 env:
   - name: RUNNER_NAME
     value: k8s-github-runner
+  - name: RUNNER_REPO
+    value: priyanshu3103/helm-charts
   - name: RUNNER_ORG
     value: priyanshu3103
   - name: EPHEMERAL
