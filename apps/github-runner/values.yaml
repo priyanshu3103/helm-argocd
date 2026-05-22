@@ -6,7 +6,7 @@ image:
   tag: "latest"
   pullPolicy: IfNotPresent
 runner:
-  orgName: "priyanshu3103"
+  orgName: "priyanshu-devops-release"
   runnerName: "k8s-github-runner"
   labels: "k8s,self-hosted,linux"
   ephemeral: "true"
