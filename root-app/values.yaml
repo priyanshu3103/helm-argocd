@@ -26,7 +26,7 @@ applicationSet:
       chartsRepo: http://chartmuseum.chartmuseum.svc.cluster.local:8080
       namespace: devops-tools
       chart: github-runner
-      version: 0.2.1
+      version: 0.2.2
       disableAutoSync: "false"
     - name: vault
       chartsRepo: https://helm.releases.hashicorp.com
