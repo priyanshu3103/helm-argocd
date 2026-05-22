@@ -2,13 +2,13 @@ replicaCount: 1
 revisionHistoryLimit: 5
 
 image:
-  repository: summerwind/actions-runner-dind
+  repository: myoung34/github-runner
   tag: "latest"
   pullPolicy: IfNotPresent
 runner:
-  githubUrl: "priyanshu3103/helm-charts"
-  runnerName: "k8s-github-runner"
-  labels: "k8s,self-hosted,linux"
+  # githubUrl: "priyanshu3103"
+  # runnerName: "k8s-github-runner"
+  # labels: "k8s,self-hosted,linux"
   ephemeral: "true"
   replaceExistingRunner: "true"
   tokenSecretName: github-runner-secret
@@ -16,16 +16,18 @@ runner:
 env:
   - name: RUNNER_NAME
     value: k8s-github-runner
-  - name: GITHUB_URL
-    value: priyanshu3103/helm-charts
-  - name: RUNNER_ORG
+  - name: ORG_NAME
     value: priyanshu3103
-  - name: EPHEMERAL
+  - name: RUNNER_SCOPE
+    value: "org"
+  - name: RUN_AS_ROOT
     value: "true"
-  - name: REPLACE_EXISTING_RUNNER
-    value: "true"
-  - name: RUNNER_TOKEN
+  - name: LABELS
+    value: "k8s,self-hosted,linux"
+  - name: RUNNER_WORKDIR
+    value: /tmp/github-runner
+  - name: ACCESS_TOKEN
     valueFrom:
       secretKeyRef:
         name: github-runner-secret
-        key: runner-token
+        key: github_token
