@@ -1,5 +1,5 @@
 runner:
-  # githubUrl: "priyanshu3103/helm-charts"
+  githubUrl: "priyanshu3103/helm-charts"
   runnerName: "k8s-github-runner"
   labels: "k8s,self-hosted,linux"
   ephemeral: "true"
