@@ -8,7 +8,7 @@ applicationSet:
       chartsRepo: http://chartmuseum.chartmuseum.svc.cluster.local:8080
       namespace: devops-tools
       chart: jenkins
-      version: 0.2.98
+      version: 0.2.99
       disableAutoSync: true
     - name: k8s-dashboard
       chartsRepo: http://chartmuseum.chartmuseum.svc.cluster.local:8080
