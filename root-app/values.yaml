@@ -14,7 +14,7 @@ applicationSet:
       chartsRepo: http://chartmuseum.chartmuseum.svc.cluster.local:8080
       namespace: devops-tools
       chart: k8s-dashboard
-      version: 0.1.34
+      version: 0.1.36
       disableAutoSync: true
     - name: chartmuseum
       chartsRepo: https://chartmuseum.github.io/charts
